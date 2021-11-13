@@ -11,7 +11,7 @@ Dans l'état actuel, toutes les informations du document "operations_stats.csv" 
 
 ## Processus
 
-Le processus utilise d'abord l'outils csv2xml (https://github.com/edesmontils/csv2xml) pour transformer les données CSV en XML. Puis, une succession de transformations XSLT permettent d'enrichir "opération.xml" à l'aide des 3 autres documents ("flotteurs.xml", "operations_stats.xml" et "resultats_humains.xml"). Ce processus est décrit par le script SHELL "run.sh" :
+Le processus utilise d'abord l'outils csv2xml (https://github.com/edesmontils/csv2xml) pour transformer les données CSV ("operation.csv", "flotteurs.csv", "operations_stats.csv" et "resultats_humains.csv") en XML. Puis, une succession de transformations XSLT permettent d'enrichir "operation.xml" à l'aide des 3 autres documents ("flotteurs.xml", "operations_stats.xml" et "resultats_humains.xml"). Ce processus est décrit par le script SHELL "run.sh" :
 
 ```shell
 python csv2xml.py -i "operation_id" -f operations.csv -n opération -r liste-opérations -k
@@ -29,6 +29,8 @@ rm operations4.xml
 ```
 
 Le résultat du processus permet d'obtenir le document "cross.xml" qui respecte le schéma DTD "operations.dtd".
+
+Les tests ont été effectués en utilisant Saxon-HE 9.7.0.15J from Saxonica (http://saxon.sourceforge.net/)
 
 ## Copyright
 
