@@ -86,7 +86,6 @@
             </liste-cross>
             <liste-opérations>
                 <xsl:apply-templates select="liste-opérations/opération"/>
-                <!-- [./est_metropolitain eq 'True'] -->
             </liste-opérations>
         </secours-en-mer>
     </xsl:template>
