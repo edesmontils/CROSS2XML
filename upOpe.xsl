@@ -91,9 +91,12 @@
     </xsl:template>
 
     <xsl:template match="opération">
-        <opération operation_id="{./operation_id}" xml:id="{replace(./cross_sitrep, ' |/', '.')}"
+        <opération operation_id="{./operation_id}" xml:id="{concat(replace(./cross_sitrep, ' |/', '.'),./operation_id)}"
             réception-alerte="{./date_heure_reception_alerte}"
-            fin-opération="{./date_heure_fin_operation}" type="{./type_operation}">
+            fin-opération="{./date_heure_fin_operation}">
+            <xsl:if test="exists(type_operation)">
+                <xsl:attribute name="type" select="type_operation"/>
+            </xsl:if>
             <evenement catégorie="{./categorie_evenement}">
                 <xsl:value-of select="evenement"/>
             </evenement>
@@ -101,8 +104,7 @@
                 catégorie="{./categorie_qui_alerte}"/>
             <xsl:if
                 test="exists(vent_force) or exists(vent_direction) or exists(vent_direction_categorie)">
-                <vent force="{./vent_force}" direction="{./vent_direction}"
-                    catégorie="{./vent_direction_categorie}">
+                <vent>
                     <xsl:if test="exists(vent_force)">
                         <xsl:attribute name="force" select="vent_force"/>
                     </xsl:if>
